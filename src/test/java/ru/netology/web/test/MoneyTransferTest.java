@@ -155,6 +155,30 @@ class MoneyTransferTest {
         Assertions.assertEquals(expectedBalanceOfFirstCard, actualBalanceOfFirstCard);
         Assertions.assertEquals(expectedBalanceOfSecondCard, actualBalanceOfSecondCard);
     }
+
+    @Test
+    void shouldTransferMoneyFromSecondToTheFirstCard20000() {
+        Configuration.holdBrowserOpen = true;
+        open("http://localhost:9999");
+        var loginPage = new LoginPageV1();
+        var authInfo = DataHelper.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationCode = DataHelper.getVerificationCode(authInfo);
+        var dashboardPage = verificationPage.validVerify(verificationCode);
+        var firstCardNumber = DataHelper.getFirstCardNumber();
+        var secondCardNumber = DataHelper.getSecondCardNumber();
+        int amount = 20000;
+        var expectedBalanceOfFirstCard = DashboardPage.getFirstCardBalance() - amount;
+        var expectedBalanceOfSecondCard = DashboardPage.getSecondCardBalance() + amount;
+
+        var transferPage = dashboardPage.cardToTransfer(secondCardNumber);
+        transferPage.makeTransfer(firstCardNumber, amount);
+
+        var actualBalanceOfFirstCard = DashboardPage.getFirstCardBalance();
+        var actualBalanceOfSecondCard = DashboardPage.getSecondCardBalance();
+        Assertions.assertEquals(expectedBalanceOfFirstCard, actualBalanceOfFirstCard);
+        Assertions.assertEquals(expectedBalanceOfSecondCard, actualBalanceOfSecondCard);
+    }
 }
 
 
