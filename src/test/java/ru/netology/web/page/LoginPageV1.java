@@ -1,7 +1,6 @@
 package ru.netology.web.page;
 
 import ru.netology.web.data.DataHelper;
-
 import static com.codeborne.selenide.Selenide.$;
 
 public class LoginPageV1 {
