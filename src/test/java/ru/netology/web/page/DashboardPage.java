@@ -31,22 +31,15 @@ public class DashboardPage {
 
     public static int getFirstCardBalance() {
         val text = cardsSelector.first().text();
-        return extractBalanceOfFirstCard(text);
-    }
-
-    private static int extractBalanceOfFirstCard(String text) {
-        val start = text.indexOf(balanceStart);
-        val finish = text.indexOf(balanceFinish);
-        val value = text.substring(start + balanceStart.length(), finish);
-        return Integer.parseInt(value);
+        return extractBalanceOfCard(text);
     }
 
     public static int getSecondCardBalance() {
         val text = cardsSelector.last().text();
-        return extractBalanceOfSecondCard(String.valueOf(text));
+        return extractBalanceOfCard(String.valueOf(text));
     }
 
-    private static int extractBalanceOfSecondCard(String text) {
+    private static int extractBalanceOfCard(String text) {
         val start = text.indexOf(balanceStart);
         val finish = text.indexOf(balanceFinish);
         val value = text.substring(start + balanceStart.length(), finish);

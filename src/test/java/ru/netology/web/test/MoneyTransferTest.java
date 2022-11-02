@@ -10,9 +10,8 @@ import static com.codeborne.selenide.Selenide.*;
 
 class MoneyTransferTest {
 
-
     @Test
-    void shouldTransferMoneyFromFirstToTheSecondCard500() {
+    void shouldTransferMoneyFromSecondToTheFirstCard5000() {
         Configuration.holdBrowserOpen = true;
         open("http://localhost:9999");
         var loginPage = new LoginPageV1();
@@ -22,56 +21,7 @@ class MoneyTransferTest {
         var dashboardPage = verificationPage.validVerify(verificationCode);
         var firstCardNumber = DataHelper.getFirstCardNumber();
         var secondCardNumber = DataHelper.getSecondCardNumber();
-        int amount = 500;
-        var expectedBalanceOfFirstCard = DashboardPage.getFirstCardBalance() + amount;
-        var expectedBalanceOfSecondCard = DashboardPage.getSecondCardBalance() - amount;
-
-        var transferPage = dashboardPage.cardToTransfer(firstCardNumber);
-        transferPage.makeTransfer(secondCardNumber, amount);
-
-        var actualBalanceOfFirstCard = DashboardPage.getFirstCardBalance();
-        var actualBalanceOfSecondCard = DashboardPage.getSecondCardBalance();
-        Assertions.assertEquals(expectedBalanceOfFirstCard, actualBalanceOfFirstCard);
-        Assertions.assertEquals(expectedBalanceOfSecondCard, actualBalanceOfSecondCard);
-    }
-
-
-    @Test
-    void shouldTransferMoneyFromSecondToTheFirstCard500() {
-        Configuration.holdBrowserOpen = true;
-        open("http://localhost:9999");
-        var loginPage = new LoginPageV1();
-        var authInfo = DataHelper.getAuthInfo();
-        var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCode(authInfo);
-        var dashboardPage = verificationPage.validVerify(verificationCode);
-        var firstCardNumber = DataHelper.getFirstCardNumber();
-        var secondCardNumber = DataHelper.getSecondCardNumber();
-        int amount = 500;
-        var expectedBalanceOfFirstCard = DashboardPage.getFirstCardBalance() - amount;
-        var expectedBalanceOfSecondCard = DashboardPage.getSecondCardBalance() + amount;
-
-        var transferPage = dashboardPage.cardToTransfer(secondCardNumber);
-        transferPage.makeTransfer(firstCardNumber, amount);
-
-        var actualBalanceOfFirstCard = DashboardPage.getFirstCardBalance();
-        var actualBalanceOfSecondCard = DashboardPage.getSecondCardBalance();
-        Assertions.assertEquals(expectedBalanceOfFirstCard, actualBalanceOfFirstCard);
-        Assertions.assertEquals(expectedBalanceOfSecondCard, actualBalanceOfSecondCard);
-    }
-
-    @Test
-    void shouldTransferMoneyFromFirstToTheSecondCard15000() {
-        Configuration.holdBrowserOpen = true;
-        open("http://localhost:9999");
-        var loginPage = new LoginPageV1();
-        var authInfo = DataHelper.getAuthInfo();
-        var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCode(authInfo);
-        var dashboardPage = verificationPage.validVerify(verificationCode);
-        var firstCardNumber = DataHelper.getFirstCardNumber();
-        var secondCardNumber = DataHelper.getSecondCardNumber();
-        int amount = 15000;
+        int amount = 5000;
         var expectedBalanceOfFirstCard = DashboardPage.getFirstCardBalance() + amount;
         var expectedBalanceOfSecondCard = DashboardPage.getSecondCardBalance() - amount;
 
@@ -85,7 +35,7 @@ class MoneyTransferTest {
     }
 
     @Test
-    void shouldTransferMoneyFromSecondToTheFirstCard15000() {
+    void shouldTransferMoneyFromFirstToTheSecondCard5000() {
         Configuration.holdBrowserOpen = true;
         open("http://localhost:9999");
         var loginPage = new LoginPageV1();
@@ -95,7 +45,7 @@ class MoneyTransferTest {
         var dashboardPage = verificationPage.validVerify(verificationCode);
         var firstCardNumber = DataHelper.getFirstCardNumber();
         var secondCardNumber = DataHelper.getSecondCardNumber();
-        int amount = 15000;
+        int amount = 5000;
         var expectedBalanceOfFirstCard = DashboardPage.getFirstCardBalance() - amount;
         var expectedBalanceOfSecondCard = DashboardPage.getSecondCardBalance() + amount;
 
@@ -109,7 +59,7 @@ class MoneyTransferTest {
     }
 
     @Test
-    void shouldTransferMoneyFromFirstTiTheSecondCardAgain21000() {
+    void shouldTransferMoneyFromSecondToTheFirstCard10000() {
         Configuration.holdBrowserOpen = true;
         open("http://localhost:9999");
         var loginPage = new LoginPageV1();
@@ -119,7 +69,7 @@ class MoneyTransferTest {
         var dashboardPage = verificationPage.validVerify(verificationCode);
         var firstCardNumber = DataHelper.getFirstCardNumber();
         var secondCardNumber = DataHelper.getSecondCardNumber();
-        int amount = 21000;
+        int amount = 10000;
         var expectedBalanceOfFirstCard = DashboardPage.getFirstCardBalance() + amount;
         var expectedBalanceOfSecondCard = DashboardPage.getSecondCardBalance() - amount;
 
@@ -133,7 +83,7 @@ class MoneyTransferTest {
     }
 
     @Test
-    void shouldTransferMoneyFromSecondToTheFirstCard21000() {
+    void shouldTransferMoneyFromSecondToTheFirstCard10000Again() {
         Configuration.holdBrowserOpen = true;
         open("http://localhost:9999");
         var loginPage = new LoginPageV1();
@@ -143,21 +93,21 @@ class MoneyTransferTest {
         var dashboardPage = verificationPage.validVerify(verificationCode);
         var firstCardNumber = DataHelper.getFirstCardNumber();
         var secondCardNumber = DataHelper.getSecondCardNumber();
-        int amount = 21000;
-        var expectedBalanceOfFirstCard = DashboardPage.getFirstCardBalance() - amount;
-        var expectedBalanceOfSecondCard = DashboardPage.getSecondCardBalance() + amount;
+        int amount = 10000;
+        var expectedBalanceOfFirstCard = DashboardPage.getFirstCardBalance() + amount;
+        var expectedBalanceOfSecondCard = DashboardPage.getSecondCardBalance() - amount;
 
-        var transferPage = dashboardPage.cardToTransfer(secondCardNumber);
-        transferPage.makeTransfer(firstCardNumber, amount);
+        var transferPage = dashboardPage.cardToTransfer(firstCardNumber);
+        transferPage.makeTransfer(secondCardNumber, amount);
 
         var actualBalanceOfFirstCard = DashboardPage.getFirstCardBalance();
         var actualBalanceOfSecondCard = DashboardPage.getSecondCardBalance();
         Assertions.assertEquals(expectedBalanceOfFirstCard, actualBalanceOfFirstCard);
         Assertions.assertEquals(expectedBalanceOfSecondCard, actualBalanceOfSecondCard);
     }
-
+// Негативный тест перевод денег с карты имеющей отрицательный баланс
     @Test
-    void shouldTransferMoneyFromSecondToTheFirstCard20000() {
+    void shouldTransferMoneyFromFirstToTheSecondCard50000() {
         Configuration.holdBrowserOpen = true;
         open("http://localhost:9999");
         var loginPage = new LoginPageV1();
@@ -167,7 +117,7 @@ class MoneyTransferTest {
         var dashboardPage = verificationPage.validVerify(verificationCode);
         var firstCardNumber = DataHelper.getFirstCardNumber();
         var secondCardNumber = DataHelper.getSecondCardNumber();
-        int amount = 20000;
+        int amount = 50000;
         var expectedBalanceOfFirstCard = DashboardPage.getFirstCardBalance() - amount;
         var expectedBalanceOfSecondCard = DashboardPage.getSecondCardBalance() + amount;
 
