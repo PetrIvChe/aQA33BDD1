@@ -41,4 +41,9 @@ public class DataHelper {
 
         return new CardInfo("5559000000000002");
     }
+
+    public static CardInfo getSecondCardNumberWrong() {
+
+        return new CardInfo("5559000000000000");
+    }
 }
